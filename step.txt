@@ -1,0 +1,41 @@
+virtualenv
+1. pip3 install virtualenv
+2. python3 -m venv venv
+3. source venv/bin/activate
+
+vscode使用jupyter notebook
+1. pip3 install ipykernel
+2. python3 -m ipykernel install --user --name=venv
+3. 重新開啟vscode
+
+html5lib lxml的差異
+1. lxml非內建，需要pip3 install lxml
+2. html5lib更準，但較慢
+
+
+解析html
+resp = requests.get('https://code-gym.github.io/spider_demo/')
+soup = BeautifulSoup(resp.text, 'html5lib')
+
+找標籤
+1. soup.find('h1').text === soup.h1.text
+2. soup.find_all('h3') 吐出所有h3包含底下的html，可用每個h3.a抓出特定的tag
+3. soup.find_all('h3', "className") 指定帶有class為特定值，才可抓，可用於排除沒資料的東西(官網本身的規律)
+4. soup.find_all('a',{'class':'post-category'}) 用key-value指定，不局限於class
+5. object.parent 抓出的html的上一層
+6. object.previous_sibling / object.next_sibling 抓前後同一層
+*****
+7. object.children 抓出html的下一層，為iterator，需要for loop 取出
+
+抓取標籤的文字
+*****
+object.stripped_strings => 抓取該範圍內的html包圍的文字，本身為iterator，需要for loop取出
+object.text => 抓出該行的文字(非iterator，直接針對該行取出)
+
+抓取標籤內的屬性
+object["href"]
+
+
+time的小知識
+1. time.strftime('%m/%d') 取得月/日
+2. time.strftime('%m/%d').lstrip('0') 去除前綴為0的字串
